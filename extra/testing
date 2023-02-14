@@ -1,0 +1,8 @@
+const chai = require("chai");
+
+it("Test Case #1", function () {
+  const string = "(()))(";
+  const expected = 4;
+  const actual = window.longestBalancedSubstring(string);
+  chai.expect(actual).to.deep.equal(expected);
+});
