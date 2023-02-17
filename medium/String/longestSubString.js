@@ -1,3 +1,22 @@
+//start at index 1
+//loop through string, check for repeaded characters
+//update longest string
+//return longest string .length
+const lengthOfLongestSubstring = function (s) {
+  let longestSubStr = "";
+  for (let i = 1; i < s.length - 1; i++) {
+    //n
+    if (!longestSubStr.includes(s[i])) longestSubStr += s[i]; //n
+  }
+  return longestSubStr.length;
+};
+
+// //O(n^2) - time
+// //O(n) - n is equal to the length of the string
+// lengthOfLongestSubstring('') // 0
+// lengthOfLongestSubstring('p') //1
+// lengthOfLongestSubstring('1g$^&')//5
+
 //hashMap solution to reduce time complexity
 const lengthOfLongestSubstring = function (s) {
   let visited = new Map();
