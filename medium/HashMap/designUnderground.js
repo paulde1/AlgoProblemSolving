@@ -12,13 +12,11 @@ const UndergroundSystem = function () {
  * @return {void}
  */
 UndergroundSystem.prototype.checkIn = function (id, stationName, t) {
-  //update table with station name, time
-  if ((id, stationName, t)) {
-    this.checkInMap[id] = {
-      startStation: stationName,
-      startTime: t,
-    };
-  }
+  //update table with station name, time by id
+  this.checkInMap[id] = {
+    startStation: stationName,
+    startTime: t,
+  };
 };
 
 /**
@@ -29,20 +27,20 @@ UndergroundSystem.prototype.checkIn = function (id, stationName, t) {
  */
 UndergroundSystem.prototype.checkOut = function (id, stationName, t) {
   //create a path from start station to end station
-  //create a totaltime from startime to end time (t - start)
-  // check to see if the path is already in the checkoutmap
+  //create a startime variable by from checkin
+  // check to see if the path is already in the checkout
   //if not the path define with 'frequency' = 1 and path 'totalTime' = difference in end and start
   //else increase frequency and increase total time by difference
-  let path = `${this.checkInMap[id]["startStation"]}-${stationName}`;
-  let checkInTime = this.checkInMap[id]["startTime"];
+  const path = `${this.checkInMap[id]["startStation"]}-${stationName}`;
+  const startTime = this.checkInMap[id]["startTime"];
   if (!this.checkOutMap[path]) {
     this.checkOutMap[path] = {
       frequency: 1,
-      totalTime: t - checkInTime,
+      totalTime: t - startTime,
     };
   } else {
     this.checkOutMap[path]["frequency"]++;
-    this.checkOutMap[path]["totalTime"] += t - checkInTime;
+    this.checkOutMap[path]["totalTime"] += t - startTime;
   }
 };
 
@@ -56,7 +54,7 @@ UndergroundSystem.prototype.getAverageTime = function (
   endStation
 ) {
   //set a path using arguments
-  //return path total time / path freqeuncy
+  //return path total time / path freqeuncy (from checkOutMap obj)
   let path = `${startStation}-${endStation}`;
   return (
     this.checkOutMap[path]["totalTime"] / this.checkOutMap[path]["frequency"]
