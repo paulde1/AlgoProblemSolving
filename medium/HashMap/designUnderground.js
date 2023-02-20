@@ -68,3 +68,27 @@ UndergroundSystem.prototype.getAverageTime = function (
  * obj.checkOut(id,stationName,t)
  * var param_3 = obj.getAverageTime(startStation,endStation)
  */
+// using class constructor and reducer
+class UndergroundSystem {
+  constructor() {
+    this.idMap = new Map();
+    this.durationMap = new Map();
+  }
+  checkIn(id, stationName, t) {
+    this.idMap.set(id, { stationName, checkInTime: t });
+  }
+  checkOut(id, stationName, t) {
+    const startStation = this.idMap.get(id);
+    const stationRoute = `${startStation.stationName}, ${stationName}`;
+    const duration = t - startStation.checkInTime;
+    if (this.durationMap.has(stationRoute)) {
+      this.durationMap.get(stationRoute).push(duration);
+    } else {
+      this.durationMap.set(stationRoute, [duration]);
+    }
+  }
+  getAverageTime(startStation, endStation) {
+    const durationList = this.durationMap.get(`${startStation}, ${endStation}`);
+    return durationList.reduce((a, b) => a + b) / durationList.length;
+  }
+}
