@@ -13,23 +13,22 @@
  * @return {Node}
  */
 // recursive approach, uses whiloe loop O(n)
-// const flatten = function(head) {
-//     const result = [];
-//     const flat = (node) => {
-//         if (!node) return null;
-//         result.push(node);
-//         flat(node.child)
-//         flat(node.next)
-//     };
-//     flat(head);
-//     for(let i = 0; i < result; i++){
-//         result[i].prev = result[i-1] || null;
-//         result[i].next = result[i+1] || null;
-//         result[i].child = null;
-//     }
-//     console.log(result[0] || null)
-//     return result[0] || null
-// };
+const flatten = function (head) {
+  const result = [];
+  const flat = (node) => {
+    if (!node) return null;
+    result.push(node);
+    flat(node.child);
+    flat(node.next);
+  };
+  flat(head);
+  for (let i = 0; i < result; i++) {
+    result[i].prev = result[i - 1] || null;
+    result[i].next = result[i + 1] || null;
+    result[i].child = null;
+  }
+  return result[0] || null;
+};
 
 // iterative O(n) - time , O(!) space
 const flatten = function (head) {
