@@ -1,4 +1,5 @@
-function findClosestValueInBst(tree, target) {
+
+ function findClosestValueInBst(tree, target) {
   let difference =  {value: Infinity, closest: null}
   findClosestValue(tree, target, difference)
   return difference.closest
@@ -24,6 +25,4 @@ class BST {
     this.right = null;
   }
 }
-
-// Do not edit the line below.
 exports.findClosestValueInBst = findClosestValueInBst;
