@@ -29,3 +29,14 @@ const twoSum = function (nums, target) {
 };
 // O(n)
 //O(n)
+
+
+const twoSum = (nums, target) => {
+let container = {};
+for(let i = 0; i < nums.length; i++){
+     let difference = target - nums[i]
+     if(difference in container|| nums[i] === 0) {
+         return [i, container[difference]]
+     } container[nums[i]] = i ; 
+    }
+}
