@@ -13,3 +13,18 @@ function twoNumberSum(array, targetSum) {
 }
 
 exports.twoNumberSum = twoNumberSum;
+
+const twoSum = (nums, target) => {
+    let result = [];
+    for(let i = 0; i < nums.length; i++){
+        let num1 = nums[i]
+        for(let j = 0; j < nums.length; j ++){
+            let num2 = nums[j];
+            if(i !== j && num1 + num2 === target){
+                result.push(i, j)
+                return result;
+            }
+        }
+    }
+    return result;
+}
